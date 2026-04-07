@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://recoverydrones.com.br/sitemap.xml

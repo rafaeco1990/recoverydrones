@@ -1,0 +1,13 @@
+PUBLICAÇÃO NO GITHUB PAGES
+
+1. Faça backup do repositório atual.
+2. Extraia este ZIP.
+3. Envie todos os arquivos para a branch que publica o site.
+4. Aguarde o GitHub Pages atualizar.
+5. No Search Console, reenvie o sitemap.xml.
+6. Solicite indexação apenas da home e de 5 a 10 páginas principais primeiro.
+
+IMPORTANTE
+- A aparência foi mantida.
+- As mudanças ficaram concentradas em SEO técnico invisível: canonical, Open Graph, robots meta e schema.
+- Não foi adicionada navegação visível nova.
