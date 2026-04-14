@@ -4,116 +4,250 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Diagnóstico de Drone | Recovery Drones</title>
+  <meta name="description" content="Faça um diagnóstico rápido do seu drone e envie as informações direto para a Recovery Drones no WhatsApp.">
   <link rel="stylesheet" href="style.css">
+  <style>
+    .page-hero{
+      padding: 4.5rem 0 2rem;
+      background:
+        radial-gradient(circle at top right, rgba(15,23,42,.08), transparent 22%),
+        linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+      border-bottom: 1px solid var(--line);
+    }
+    .page-hero h1{
+      margin: 1rem 0 0;
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      line-height: 1.03;
+      letter-spacing: -.03em;
+      max-width: 12ch;
+    }
+    .page-hero p{
+      margin: 1rem 0 0;
+      max-width: 720px;
+      color: var(--muted);
+      line-height: 1.9;
+      font-size: 1.05rem;
+    }
+    .diag-wrap{
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 1.5rem;
+      padding: 3rem 0 5rem;
+    }
+    .diag-card, .diag-side{
+      border:1px solid var(--line);
+      border-radius:28px;
+      background:#fff;
+      box-shadow:var(--shadow);
+    }
+    .diag-card{padding:1.6rem;}
+    .diag-side{padding:1.8rem;}
+    .diag-card h2, .diag-side h2{
+      margin:0 0 .8rem;
+      font-size:1.6rem;
+      letter-spacing:-.02em;
+    }
+    .diag-card p, .diag-side p, .diag-side li{
+      color:var(--muted);
+      line-height:1.8;
+    }
+    .diag-form{
+      display:grid;
+      gap:1rem;
+      margin-top:1.4rem;
+    }
+    .diag-form label{
+      display:block;
+      font-size:.93rem;
+      font-weight:700;
+      margin-bottom:.45rem;
+      color:var(--dark);
+    }
+    .diag-form input, .diag-form select, .diag-form textarea{
+      width:100%;
+      border:1px solid #cbd5e1;
+      border-radius:18px;
+      background:#fff;
+      color:var(--dark);
+      padding:1rem 1rem;
+      font:inherit;
+      outline:none;
+      transition:border-color .2s ease, box-shadow .2s ease;
+    }
+    .diag-form input:focus, .diag-form select:focus, .diag-form textarea:focus{
+      border-color:#0f172a;
+      box-shadow:0 0 0 4px rgba(15,23,42,.08);
+    }
+    .diag-form textarea{
+      min-height:120px;
+      resize:vertical;
+    }
+    .diag-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:.85rem;
+      margin-top:.4rem;
+    }
+    .diag-note{
+      margin-top:1rem;
+      font-size:.92rem;
+      color:#64748b;
+    }
+    .diag-list{
+      margin:1rem 0 0;
+      padding-left:1.1rem;
+    }
+    .diag-list li + li{ margin-top:.6rem; }
+    .top-link{
+      display:inline-flex;
+      align-items:center;
+      gap:.5rem;
+      color:#334155;
+      font-weight:700;
+    }
+    .footer-mini{
+      border-top:1px solid var(--line);
+      padding:1.2rem 0 2rem;
+      color:#64748b;
+      font-size:.92rem;
+      text-align:center;
+    }
+    @media (max-width: 920px){
+      .diag-wrap{grid-template-columns:1fr;}
+    }
+  </style>
 </head>
 <body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <div class="brand-badge" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" class="drone-svg">
+            <rect x="9" y="9" width="6" height="6" rx="2" stroke="currentColor" stroke-width="1.6"></rect>
+            <line x1="12" y1="12" x2="6" y2="6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></line>
+            <line x1="12" y1="12" x2="18" y2="6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></line>
+            <line x1="12" y1="12" x2="6" y2="18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></line>
+            <line x1="12" y1="12" x2="18" y2="18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></line>
+            <g><line x1="2.8" y1="4.5" x2="6.2" y2="4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"></line><line x1="4.5" y1="2.8" x2="4.5" y2="6.2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"></line></g>
+            <g><line x1="17.8" y1="4.5" x2="21.2" y2="4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"></line><line x1="19.5" y1="2.8" x2="19.5" y2="6.2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"></line></g>
+            <g><line x1="2.8" y1="19.5" x2="6.2" y2="19.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"></line><line x1="4.5" y1="17.8" x2="4.5" y2="21.2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"></line></g>
+            <g><line x1="17.8" y1="19.5" x2="21.2" y2="19.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"></line><line x1="19.5" y1="17.8" x2="19.5" y2="21.2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"></line></g>
+          </svg>
+        </div>
+        <span class="brand-text">Recovery Drones</span>
+      </div>
+      <div class="header-actions">
+        <a class="btn btn-light" href="index.html">Voltar ao site</a>
+        <a class="btn btn-dark" href="https://wa.me/55997144004" target="_blank" rel="noopener">WhatsApp direto</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow"><span class="dot"></span> Pré-diagnóstico rápido</span>
+      <h1>Solicite um orçamento com mais precisão</h1>
+      <p>
+        Preencha as informações abaixo e envie direto no WhatsApp. Isso reduz conversa perdida,
+        acelera o atendimento e ajuda a Recovery Drones a entender melhor o defeito logo no primeiro contato.
+      </p>
+    </div>
+  </section>
+
   <main class="container">
-    <h1>Diagnóstico rápido do drone</h1>
-    <form onsubmit="enviarDiagnostico(event)">
-      <label for="modelo">Modelo do drone</label>
-      <select id="modelo" required>
-  <option value="">Selecione</option>
+    <div class="diag-wrap">
+      <section class="diag-card">
+        <h2>Diagnóstico rápido do drone</h2>
+        <p>Leva menos de 1 minuto. Quanto mais completo, mais fácil estimar a complexidade do reparo.</p>
 
-  <optgroup label="Mini">
-    <option>DJI Mini SE</option>
-    <option>DJI Mini 2</option>
-    <option>DJI Mini 2 SE</option>
-    <option>DJI Mini 3</option>
-    <option>DJI Mini 3 Pro</option>
-    <option>DJI Mini 4 Pro</option>
-    <option>DJI Mini 4K</option>
-  </optgroup>
+        <form class="diag-form" onsubmit="enviarDiagnostico(event)">
+          <div>
+            <label for="modelo">Modelo do drone</label>
+            <select id="modelo" required>
+              <option value="">Selecione</option>
+              <option>DJI Mini 2</option>
+              <option>DJI Mini 3</option>
+              <option>DJI Mini 4 Pro</option>
+              <option>DJI Air 2S</option>
+              <option>DJI Air 3</option>
+              <option>DJI Mavic 2</option>
+              <option>DJI Mavic 3</option>
+              <option>DJI Avata</option>
+              <option>Outro modelo</option>
+            </select>
+          </div>
 
-  <optgroup label="Air">
-    <option>DJI Air</option>
-    <option>DJI Air 2</option>
-    <option>DJI Air 2S</option>
-    <option>DJI Air 3</option>
-    <option>DJI Air 3S</option>
-  </optgroup>
+          <div>
+            <label for="problema">Tipo principal do problema</label>
+            <select id="problema" required>
+              <option value="">Selecione</option>
+              <option>Queda / impacto</option>
+              <option>Caiu na água</option>
+              <option>Não liga</option>
+              <option>Erro de gimbal</option>
+              <option>Braço / carcaça quebrada</option>
+              <option>Problema na bateria</option>
+              <option>Erro na câmera</option>
+              <option>Falha eletrônica / placa</option>
+              <option>Outro defeito</option>
+            </select>
+          </div>
 
-  <optgroup label="Mavic">
-    <option>DJI Mavic Pro</option>
-    <option>DJI Mavic Pro Platinum</option>
-    <option>DJI Mavic Air</option>
-    <option>DJI Mavic 2 Pro</option>
-    <option>DJI Mavic 2 Zoom</option>
-    <option>DJI Mavic 3</option>
-    <option>DJI Mavic 3 Classic</option>
-    <option>DJI Mavic 3 Pro</option>
-  </optgroup>
+          <div>
+            <label for="liga">O drone liga?</label>
+            <select id="liga" required>
+              <option value="">Selecione</option>
+              <option>Sim</option>
+              <option>Não</option>
+              <option>Liga às vezes</option>
+            </select>
+          </div>
 
-  <optgroup label="FPV / Avata">
-    <option>DJI FPV</option>
-    <option>DJI Avata</option>
-    <option>DJI Avata 2</option>
-  </optgroup>
+          <div>
+            <label for="cidade">Sua cidade</label>
+            <input id="cidade" type="text" placeholder="Ex.: Santa Maria" required>
+          </div>
 
-  <optgroup label="Modelos compactos e novos">
-    <option>DJI Neo</option>
-    <option>DJI Flip</option>
-  </optgroup>
+          <div>
+            <label for="detalhes">Descreva rapidamente o que aconteceu</label>
+            <textarea id="detalhes" placeholder="Ex.: bateu em árvore, caiu, troquei hélices, agora acusa erro de gimbal..."></textarea>
+          </div>
 
-  <optgroup label="Phantom e Spark">
-    <option>DJI Spark</option>
-    <option>DJI Phantom 3 Standard</option>
-    <option>DJI Phantom 3 Advanced</option>
-    <option>DJI Phantom 3 Professional</option>
-    <option>DJI Phantom 4</option>
-    <option>DJI Phantom 4 Advanced</option>
-    <option>DJI Phantom 4 Pro</option>
-    <option>DJI Phantom 4 Pro V2.0</option>
-  </optgroup>
+          <div class="diag-actions">
+            <button class="btn btn-dark" type="submit">Enviar no WhatsApp</button>
+            <a class="btn btn-light" href="https://wa.me/55997144004" target="_blank" rel="noopener">Pular e falar direto</a>
+          </div>
 
-  <optgroup label="Inspire">
-    <option>DJI Inspire 1</option>
-    <option>DJI Inspire 1 Pro</option>
-    <option>DJI Inspire 1 Raw</option>
-    <option>DJI Inspire 2</option>
-    <option>DJI Inspire 3</option>
-  </optgroup>
+          <p class="diag-note">
+            Atendimento técnico realizado em Santa Maria - RS, com recebimento via envio seguro para todo o estado.
+          </p>
+        </form>
+      </section>
 
-  <optgroup label="Enterprise / Matrice">
-    <option>DJI Mavic 2 Enterprise</option>
-    <option>DJI Mavic 2 Enterprise Advanced</option>
-    <option>DJI Mavic 3 Enterprise</option>
-    <option>DJI Mavic 3 Thermal</option>
-    <option>DJI Matrice 30</option>
-    <option>DJI Matrice 30T</option>
-    <option>DJI Matrice 300 RTK</option>
-    <option>DJI Matrice 350 RTK</option>
-  </optgroup>
+      <aside class="diag-side">
+        <h2>O que ajuda no orçamento</h2>
+        <p>Essas informações deixam a conversa mais objetiva e reduzem estimativas vagas.</p>
+        <ul class="diag-list">
+          <li>Modelo exato do drone</li>
+          <li>Se o problema começou após queda, água ou atualização</li>
+          <li>Se ele liga normalmente ou não responde</li>
+          <li>Cidade de origem, para alinhar logística e envio</li>
+          <li>Descrição curta do defeito visível</li>
+        </ul>
 
-  <option>Outro modelo DJI</option>
-  <option>Não sei o modelo</option>
-</select>
-      <label for="problema">Tipo principal do problema</label>
-      <select id="problema" required>
-        <option value="">Selecione</option>
-        <option>Queda / impacto</option>
-        <option>Caiu na água</option>
-        <option>Não liga</option>
-        <option>Erro de gimbal</option>
-        <option>Braço / carcaça quebrada</option>
-        <option>Problema na bateria</option>
-        <option>Erro na câmera</option>
-        <option>Falha eletrônica / placa</option>
-        <option>Outro defeito</option>
-      </select>
-      <label for="liga">O drone liga?</label>
-      <select id="liga" required>
-        <option value="">Selecione</option>
-        <option>Sim</option>
-        <option>Não</option>
-        <option>Liga às vezes</option>
-      </select>
-      <label for="cidade">Sua cidade</label>
-      <input id="cidade" type="text" required>
-      <label for="detalhes">Descreva rapidamente o que aconteceu</label>
-      <textarea id="detalhes"></textarea>
-      <button type="submit">Enviar no WhatsApp</button>
-    </form>
+        <h2 style="margin-top:1.8rem;">Quando vale mandar foto ou vídeo</h2>
+        <p>
+          Se houver braço quebrado, carcaça trincada, gimbal desalinhado ou mensagem de erro na tela,
+          mandar imagem junto no WhatsApp acelera bastante a triagem.
+        </p>
+      </aside>
+    </div>
   </main>
+
+  <div class="container footer-mini">
+    Recovery Drones • Diagnóstico rápido para orçamento e triagem inicial
+  </div>
+
   <script>
     function enviarDiagnostico(event){
       event.preventDefault();
@@ -122,12 +256,16 @@
       const liga = document.getElementById('liga').value.trim();
       const cidade = document.getElementById('cidade').value.trim();
       const detalhes = document.getElementById('detalhes').value.trim();
+
       let msg = "Olá! Já fiz o diagnóstico no site 👇\n";
       msg += "Modelo: " + modelo + "\n";
       msg += "Problema: " + problema + "\n";
       msg += "Liga: " + liga + "\n";
       msg += "Cidade: " + cidade + "\n";
-      if (detalhes) msg += "Detalhes: " + detalhes;
+      if (detalhes) {
+        msg += "Detalhes: " + detalhes;
+      }
+
       window.location.href = "https://wa.me/55997144004?text=" + encodeURIComponent(msg);
     }
   </script>
