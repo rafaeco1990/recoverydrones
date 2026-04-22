@@ -1,0 +1,19 @@
+Pacote final Recovery Drones
+
+O que foi corrigido
+- Todas as páginas locais foram recriadas com o mesmo CSS da home (style.css), evitando o visual preto/sem estilo.
+- Novas páginas no padrão SEO: assistencia-dji-[cidade].html
+- Páginas antigas assistencia-drone-[cidade]-rs.html agora redirecionam para as novas URLs.
+- sitemap.xml regenerado com home + 4 serviços por cidade (75 cidades / 300 URLs de serviço).
+- robots.txt revisado apontando para o sitemap atual.
+- Home atualizada com seção de links para páginas locais estratégicas.
+
+Serviços cobertos por cidade
+1. manutencao-drone-[cidade].html
+2. assistencia-dji-[cidade].html
+3. reparo-bateria-dji-[cidade].html
+4. manutencao-bateria-dji-[cidade].html
+
+Observação de marca
+- Não foram criadas páginas com “autorizada DJI”, porque esse termo só deve ser usado se houver autorização formal da marca.
+- Foi adotado o termo seguro: “Assistência DJI”.
