@@ -1,0 +1,1 @@
+Favicon e ícones adicionados na raiz do site. Tags inseridas no <head> das páginas HTML.
